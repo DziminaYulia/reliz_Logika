@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Наклейки",
+    "price": 25,
+    "image": "nakleuka.png"
+  },
+  {
+    "title": "Ручки",
+    "price": 25,
+    "image": "rychka.png"
+  },
+  {
+    "title": "Носки",
+    "price": 100,
+    "image": "skarpetku.png"
+  },
+  {
+    "title": "Коврик для мишки",
+    "price": 180,
+    "image": ""
+  },
+  {
+    "title": "Пляшка",
+    "price": 200,
+    "image": ""
+  }
+]
