@@ -6,3 +6,14 @@ nav {
   width: 150px;
   height: 60px;
 }
+.products-list {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.order {
+  display: none;
+}
