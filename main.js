@@ -1,3 +1,5 @@
+/* Файл із спільними скриптами для всього сайту (анімації, меню, кошик) */
+
 // Функція для отримання значення кукі за ім'ям
 function getCookieValue(cookieName) {
   // Розділяємо всі куки на окремі частини
@@ -17,13 +19,10 @@ function getCookieValue(cookieName) {
   return "";
 }
 
-// Оголошуємо асинхронну функцію для отримання продуктів з сервера
+// Отримуємо дані про товари з JSON файлу
 async function getProducts() {
-  // Виконуємо запит до файлу "store_db.json" та очікуємо на відповідь
   let response = await fetch("store.json");
-  // Очікуємо на отримання та розпакування JSON-даних з відповіді
   let products = await response.json();
-  // Повертаємо отримані продукти
   return products;
 }
 
@@ -50,7 +49,7 @@ getProducts().then(function (products) {
   }
 
   // Отримуємо всі кнопки "Купити" на сторінці
-  let buyButtons = document.querySelectorAll(".products-list .cart-btn");
+  let buyButtons = document.querySelectorAll(".products-list .btn-primary");
   // Навішуємо обробник подій на кожну кнопку "Купити"
   if (buyButtons) {
     buyButtons.forEach(function (button) {
@@ -115,13 +114,13 @@ function addToCart(event) {
   console.log(cart);
 }
 
-//КОРЗИНА
+//Корзина
 let cart_list = document.querySelector(".cart-items-list");
 let cart_total = document.querySelector(".cart-total");
 let orderBtn = document.querySelector("#orderBtn");
 let orderSection = document.querySelector(".order");
-let cartBtn = document.querySelector(".cart-btn1");
-
+let orderForm = document.querySelector(".order-form");
+let confirmBtn = document.querySelector(".confirm-order-btn");
 function get_item(item) {
   return `<div class = "cart-item">
                 <h4 class="cart-item-title">${item.title}</h4>
@@ -148,15 +147,13 @@ showCartList();
 orderBtn.addEventListener("click", function (event) {
   orderBtn.style.display = "none";
   orderSection.style.display = "block";
-  anime({
-    targets: ".order",
-    opacity: 1, // Кінцева прозорість (1 - повністю видимий)
-    duration: 1000, // Тривалість анімації в мілісекундах
-    easing: "easeInOutQuad",
-  });
 });
 
-cartBtn.addEventListener("click", function () {
-  alert("Ваше замовлення прийнято, очікуйте на дзівнок менеджера ");
-  orderSection.reset();
+confirmBtn.addEventListener("click", function () {
+  if (orderForm.checkValidity()) {
+    alert("Ваше замовлення успішно оформлено!");
+    orderForm.reset();
+  } else {
+    orderForm.reportValidity();
+  }
 });
