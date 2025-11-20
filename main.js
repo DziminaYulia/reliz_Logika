@@ -98,6 +98,11 @@ class ShoppingCart {
     }
     return total;
   }
+
+  clearCart() {
+    this.items = {}; // очищаємо об'єкт кошика
+    document.cookie = "cart=; max-age=0; path=/"; // видаляємо кукі
+  }
 }
 
 // Створення об'єкта кошика
@@ -118,6 +123,7 @@ function addToCart(event) {
 let cart_list = document.querySelector(".cart-items-list");
 let cart_total = document.querySelector(".cart-total");
 let orderBtn = document.querySelector("#orderBtn");
+let deleteBtn = document.querySelector("#deleteBtn");
 let orderSection = document.querySelector(".order");
 let orderForm = document.querySelector(".order-form");
 let confirmBtn = document.querySelector(".confirm-order-btn");
@@ -156,4 +162,9 @@ confirmBtn.addEventListener("click", function () {
   } else {
     orderForm.reportValidity();
   }
+});
+
+deleteBtn.addEventListener("click", function () {
+  document.cookie = "cart=; max-age=0; path=/";
+  location.reload();
 });
